@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sp" class="com.javasoft.StringPrinter"/>
+	<bean id="cp" class="com.javasoft.ConsolePrinter"/>		
+	<bean id="hello" class="com.javasoft.Hello">
+		<property name="names">
+			<list>
+				<value>Spring</value>
+				<value>JSP</value>
+				<value>Servlet</value>
+			</list>
+		</property>
+		<property name="editors">
+			<set>
+				<value>Sublime Text</value>
+				<value>visual Studio Code</value>
+				<value>Eclipse</value>
+				<value>Sublime Text</value>
+				<value>visual Studio Code</value>
+				<value>Eclipse</value>
+				<!-- Set은 중복안됨 : 확인할것 -->
+			</set>
+		</property>
+		<property name="ages">
+			<map>
+				<entry key="한지민" value="24"/>
+				<entry key="이미자" value="70"/>
+				<entry>
+					<key>
+						<value>조용필</value>
+					</key>
+					<value>65</value>
+				</entry>
+				
+			</map>
+		</property>
+		<property name="addresses">
+			<props>
+				<prop key="한지민">서울시 강남구 역삼동</prop>
+				<prop key="이미자">경기도 성남시 분당동</prop>
+				<prop key="조용필">부산 광역시 해운대</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
