@@ -1,4 +1,4 @@
-/*package test;
+package test;
 
 
 import static org.junit.Assert.assertSame;
@@ -7,20 +7,26 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
-
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.javasoft.Hello;
 import com.javasoft.Printer;
 
-public class HelloBeanTest2 {
-	private ApplicationContext ctx;
-	@Before
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="config/beans.xml")
+public class HelloBeanTest3 {
+	@Autowired
+	ApplicationContext ctx;
+	/*@Before Stirn-test에서는 필요 없음
 	public void init() {
 		this.ctx= new GenericXmlApplicationContext("resources/beans.xml");
-	}
-	@Test @Ignore
+	}*/
+	@Test /*@Ignore*/
 	public void aaa() {
 		Hello hello= ctx.getBean("hello",Hello.class );
 		//System.out.println(hello.sayHello());
@@ -41,4 +47,3 @@ public class HelloBeanTest2 {
 	}
 	
 }
-*/
