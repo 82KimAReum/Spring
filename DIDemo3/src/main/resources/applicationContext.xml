@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="student1" class="com.javasoft.Student">
+		<constructor-arg index="0" value="한지민" />
+		<constructor-arg><value>24</value></constructor-arg>
+		<constructor-arg><value>172.5</value></constructor-arg>
+		<constructor-arg index="3" value="52.4" />
+		<property name="hobbies">
+			<list>
+				<value>낚시</value>
+				<value>등산</value>
+				<value>독서</value>
+			</list>
+		</property>
+		<property name="editors">
+			<set>
+				<value>Visual Studio Code</value>
+				<value>Eclipse</value>
+				<value>Notepad</value>
+			</set>
+		</property>
+		<property name="addresses">
+			<map>
+				<entry key="조용필" value="서울시 강남구 역삼동" />
+				<entry key="이미자" value="부산시 해운대구 해운대동" />
+				<entry key="설운도" value="인천시 부평구 부평동" />
+			</map>
+		</property>
+	</bean>
+	<bean id="info" class="com.javasoft.StudentInfo">
+		<property name="student">
+			<ref bean="student1" />
+		</property>
+	</bean>
+</beans>
