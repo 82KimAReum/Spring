@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	
+	<bean id="jimin" class="com.javasoft.Student" scope="prototype">
+		<constructor-arg value="한지민"></constructor-arg>
+		<constructor-arg value="24"></constructor-arg>
+	</bean> 
+	
+	<!-- @PostConstruct/ @PreDestroy로 할때는 아래 3개중 하나를 사용해야 함  -->
+	<!-- <context:annotation-config/>-->
+	<!-- <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"></bean> -->	
+	<!-- 메소드를 사용하는 방법  -->
+	<!-- <bean id="car" class="com.javasoft.Product" init-method="init" destroy-method="destroy">
+		<property name="name" value="소나타" />
+		<property name="price" value="30000000" />
+	</bean> -->
+	
+</beans>
