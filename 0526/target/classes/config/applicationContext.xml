@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 값치환 -->
+	<!-- <context:property-placeholder location="config/userinfo.properties"/>
+	<bean id="student1" class="com.javasoft.Student">
+		<constructor-arg><value>${user.irum}</value></constructor-arg>
+		<constructor-arg index="1" value="${user.age}"/>
+		<constructor-arg>
+			<list>
+				<value>${user.hobby1}</value>
+				<value>${user.hobby2}</value>
+				<value>${user.hobby3}</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg><value>${user.height}</value></constructor-arg>
+		<constructor-arg value="${user.weight}"/>
+	</bean> -->
+	
+	<context:property-placeholder location="config/product.properties"/>
+	<context:component-scan base-package="com.javasoft"/>
+
+</beans>

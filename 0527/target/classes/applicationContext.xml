@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	
+	<context:property-placeholder 
+		location="classpath:userinfo.properties, classpath:userinfo1.properties"/>
+	<bean id="student1" class="com.javasoft.Student" c:name="${user.irum}" c:age="${user.age}" c:grade="${user.grade}" c:classNum="${user.classNum}">
+		<property name="hobbies">
+			<list>
+				<value>${user.hobby1}</value>
+				<value>${user.hobby2}</value>
+			</list>
+		</property>	
+		<property name="subjects">
+			<set>
+				<value>${user.subject1}</value>
+				<value>${user.subject2}</value>
+				<value>${user.subject3}</value>
+			</set>
+		</property>
+	</bean>
+	
+
+</beans>
