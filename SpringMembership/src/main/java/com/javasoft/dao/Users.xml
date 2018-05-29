@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Users">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="userVO" type="com.javasoft.vo.UserVO"/>
+
+  <resultMap id="UserResult" class="userVO">
+    <result property="userid" column="userid"/>
+    <result property="irum" column="irum"/>
+    <result property="gender" column="gender" javaType="java.lang.String" jdbcType="CHAR"/>
+    <result property="city" column="city"/>
+  
+  </resultMap>
+ <!--  <resultMap id="CountrycodeResult" class="City">  
+    <result property="countryCode" column="CountryCode"/>
+  </resultMap> -->
+
+  <!-- Select with no parameters using the result map for Account class. -->
+  <select id="selectOne" resultMap="UserResult" parameterClass="java.lang.String">
+    select * 
+    from Membership
+    where userid=#userid#
+  </select>
+  
+
+
+</sqlMap>

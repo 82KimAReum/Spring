@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.javasoft.vo.UserVO">
+	
+	<resultMap type="UserVO" id="selectMap">
+		<result property="userid" column="userid"/>
+		<result property="irum" column="irum"/>
+		<result property="gender" column="gender" javaType="String" jdbcType="CHAR"/>
+		<result property="city" column="city"/>
+	</resultMap>
+	
+	<parameterMap type="hashMap" id="selectAllMap">
+		<parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="selectMap"/>
+	</parameterMap>
+	
+	<select id="selectAllSP" statementType="CALLABLE" parameterMap="selectAllMap">
+		{ call sp_membership_selectall(?) }
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="UserVO">
+		SELECT * FROM Membership WHERE userid = #{userid}
+	</select>
+	
+	<parameterMap type="UserVO" id="insertParamMap">
+		<parameter property="userid" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="irum" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="gender" javaType="java.lang.String" jdbcType="CHAR" mode="IN"/>
+		<parameter property="city" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	
+	<insert id="insertSP" parameterMap="insertParamMap">
+		{ call sp_membership_insert(?,?,?,?)}
+	</insert>
+	
+	
+	<update id="updateSP" parameterType="UserVO">
+		{ call sp_membership_update(#{userid},#{irum},#{city})}
+	</update>
+	
+	
+	<parameterMap type="String" id="delParamMap">
+		<parameter property="userid" 
+		                 javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+	</parameterMap>
+	
+	<delete id="deleteSP" parameterType="String" parameterMap="delParamMap">
+		{ call sp_membership_delete(?)}
+	</delete>
+	
+</mapper>

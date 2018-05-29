@@ -1,0 +1,9 @@
+com\javasoft\service\UserService.class
+com\javasoft\dao\UserDaoJdbcTemplate$UserMapper.class
+com\javasoft\dao\UserDaoImpl.class
+com\javasoft\dao\UserDaoIbatisImpl.class
+com\javasoft\dao\UserDaoJdbcTemplate.class
+com\javasoft\dao\UserDaoMybatisImpl.class
+com\javasoft\dao\UserDao.class
+com\javasoft\service\UserServiceImpl.class
+com\javasoft\vo\UserVO.class
