@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<bean id="logAop" class="com.javasoft.LogAop"/>
+	<bean id="performanceAdvice" class="com.javasoft.PerformanceTraceAdvice"/>
+	
+	<!-- <aop:config>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.javasoft.*)*" id="publicMethod"/>
+			<aop:around method="loggerAop" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+	</aop:config> -->
+	<aop:config>
+		<aop:aspect id="trace" ref="performanceAdvice">
+			<aop:pointcut expression="within(com.javasoft.Student)*" id="publicMethod"/>
+			<aop:around method="trace" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	<bean id="calculator" class="com.javasoft.Calculator">
+		<property name="student" ref="student1"/>
+	</bean>
+	
+	<bean id="student1" class="com.javasoft.Student">
+		<property name="name" value="한지민"></property>
+		<property name="age" value="24"></property>
+		<property name="hobbies" >
+			<list>
+				<value>영화감상</value>
+				<value>독서</value>
+				<value>게임</value>
+			</list>
+		</property>
+		<property name="height" value="172.7"></property>
+		<property name="weight" value="51.9"></property>
+	</bean>
+</beans>
