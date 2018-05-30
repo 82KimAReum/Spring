@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="Student">
+	
+	<resultMap type="studentVO" id="selectMap">
+		<result property="hakbun" column="hakbun"/>
+		<result property="irum" column="irum"/>
+		<result property="kor" column="kor"/>
+		<result property="eng" column="eng"/>
+		<result property="mat" column="mat"/>
+		<result property="edp" column="edp"/>
+		<result property="sum" column="sum"/>
+		<result property="avg" column="avg"/>
+		<result property="grade" column="grade"/>
+	</resultMap>
+	
+	<parameterMap type="hashMap" id="studentsMap">
+	<!-- resultsSet을 쓰면 resultMap를 지정해 주어야 함 -->
+		<parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="selectMap"/>
+	</parameterMap>
+	<select id="selectAllSP" statementType="CALLABLE" parameterMap="studentsMap" >
+		{ call sp_students(?) }
+	</select>
+	
+	<parameterMap type="hashMap" id="studentMap">
+		<parameter property="hakbun" javaType="String" jdbcType="CHAR" mode="IN"/>
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="selectMap"/>
+	</parameterMap>
+	<select id="selectOneSP" statementType="CALLABLE"  parameterMap="studentMap" >
+		{ call sp_student_select_one(?,?)}
+	</select>
+	
+	
+	<parameterMap type="studentVO" id="insertMap">
+		<parameter property="hakbun" javaType="String" jdbcType="CHAR" mode="IN"/>
+		<parameter property="irum" javaType="String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="kor"  javaType="int" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="eng" javaType="int" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="mat"  javaType="int" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="edp"  javaType="int" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="sum" javaType="int" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="avg" javaType="double" jdbcType="DOUBLE" mode="IN"/>
+		<parameter property="grade"  javaType="String" jdbcType="CHAR" mode="IN"/>
+	</parameterMap>
+	<insert id="insertSP" statementType="CALLABLE" parameterMap="insertMap">
+		{ call sp_student_insert(?,?,?,?,?,?,?,?,?)}
+	</insert>
+	
+	
+	<update id="updateSP" parameterType="studentVO">
+		{  call sp_student_update(#{kor}, #{eng}, #{mat}, #{edp}, #{sum}, #{avg}, #{grade}, #{hakbun}) }
+	</update>
+	
+	
+	<parameterMap type="String" id="deleteMap">
+		<parameter property="hakbun" jdbcType="CHAR" javaType="String" mode="IN"/>
+	</parameterMap>
+	<delete id="deleteSP" parameterType="String" parameterMap="deleteMap">
+		{ call sp_student_delete(?)}
+	</delete>
+</mapper>
