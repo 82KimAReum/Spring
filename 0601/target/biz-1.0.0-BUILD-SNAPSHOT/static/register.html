@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+</head>
+<body>
+    <h1>회원 가입 창</h1>
+    <form method="GET" action="/0601/register">
+        <ul style="list-style-type: none">
+            <li>이름 : <input type="text" name="name" required/></li>
+            <li>아이디 : <input type="text" name="userid" required /></li>
+            <li>성별 : <input type="radio" name="gender" value="남성"/>남성&nbsp;&nbsp;
+                <input type="radio" name="gender" value="여성"/>여성
+            <li>거주지 : <input type="text" name="city" required/></li>
+        </ul>
+        <input type="submit" value="가입하기" />
+    </form>
+</body>
+</html>
