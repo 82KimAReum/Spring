@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="Member">
+	
+	<resultMap type="memberVO" id="selectMap">
+		<result property="name" column="name"/>
+		<result property="userid" column="userid"/>
+		<result property="gender" column="gender" />
+		<result property="city" column="city"/>
+	</resultMap>
+	
+	<select id="select" resultMap="selectMap">
+		SELECT * FROM Member
+	</select>
+	<select id="selectMember" parameterType="String" resultType="memberVO">
+		SELECT * FROM Member WHERE userid = #{userid}
+	</select>
+	
+	<insert id="insert" parameterType="memberVO">
+		INSERT INTO Member(name,userid,gender,city)
+		VALUES(#{name}, #{userid}, #{gender}, #{city})
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM Member WHERE userid = #{userid}
+	</delete>
+	
+	<update id="update" parameterType="memberVO">
+		update Member set name=#{name} ,gender=#{gender},city=#{city}
+		where userid=#{userid}
+	</update>
+</mapper>

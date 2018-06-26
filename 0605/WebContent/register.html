@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Member Add</title>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			$(function(){
+				$("input[type='button']").bind("click", function(){
+					$.ajax({
+						url : "/0605/members",
+						contentType : "application/json;charset=utf-8",
+						type : "POST",
+						data : JSON.stringify({
+							"userid" : $("#userid").val(),
+							"name" : $("#name").val(),
+							"gender" : $(".gender:checked").val(),
+							"city" : $("#city").val()
+						}),
+						dataType : "json",
+						success : function(data){
+							alert(data.code);
+							location.href="/0605/";
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Member Add</h1>
+		<ul>
+			<li>Name : <input type="text" id="name" /></li>
+			<li>ID : <input type="text" id="userid" /></li>
+			<li>Gender : 
+				<input type="radio" class="gender" name="gender" value="남성">남성&nbsp;&nbsp;
+				<input type="radio" class="gender" name="gender" value="여성">여성
+			</li>
+			<li>City : <input type="text" id="city" /></li>
+		</ul>
+		<input type="button" value="가입하기" />
+	</body>
+</html>

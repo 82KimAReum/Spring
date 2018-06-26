@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>회원 정보 페이지</title>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			var userid=null;
+			var flag=false;
+			function member_delete(){
+				$.ajax({
+					url:"/0605/members/"+userid,
+					type:"DELETE",
+					success:function(data){
+						alert(data.code);
+						location.href="/0605/";
+					}
+				})
+			}
+			function member_update(){
+				if(!flag){//수정하기 첨클릭
+					var name=$("#name").text();
+					$("span#name").replaceWith("<input type='text' id='name' value='"+name+"'/>");
+					var str="";
+					if($('#gender').text()=='남성'){
+						str="<input type='radio' class='gender' name='gender' value='남성' checked/>남성&nbsp;&nbsp;"
+							+"<input type='radio' class='gender' name='gender' value='여성'/>여성&nbsp;&nbsp;";
+					}else{
+						str="<input type='radio' class='gender' name='gender' value='남성' />남성&nbsp;&nbsp;"
+							+"<input type='radio' class='gender' name='gender' value='여성' checked/>여성&nbsp;&nbsp;";
+					}
+					
+					$("span#gender").replaceWith(str);
+					$("span#city").replaceWith("<input type='text' id='city' value='"+$('#city').text()+"'/>");
+					flag=true;
+				}else{//갱신
+					$.ajax({
+						url:"/0605/members",
+						type:"PUT",
+						data:JSON.stringify({
+							userid:userid,
+							name:$('#name').val(),
+							gender:$('.gender:checked').val(),
+							city:$('#city').val()
+						}),
+						contentType:"application/json;charset=utf-8",
+						success:function(data){
+							alert(data.code);
+							location.reload();
+						}
+					});
+					flag=false;
+				}
+				
+			}
+			
+			$(function(){
+				userid=location.search.substring(1).split("=")[1];
+				$.ajax({
+					url : "/0605/members/" + userid,
+					type : "GET",
+					success : function(data){
+						var member = data.data;
+						$("#userid").text(member.userid);
+						$("#name").text(member.name);
+						$("#gender").text(member.gender);
+						$("#city").text(member.city);
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Member Information</h1>
+		<ul>
+			<li>아이디 : <span id="userid"></span></li>
+			<li>이름 : <span id="name"></span></li>
+			<li>성별 : <span id="gender"></span></li>
+			<li>거주지 : <span id="city"></span></li>
+		</ul>
+		<a href = "javascript:void(0)" onclick="javascript:history.back();">목록으로</a>
+		<a href = "javascript:void(0)" onclick="javascript:member_delete();">삭제하기</a>
+		<a href = "javascript:void(0)" onclick="javascript:member_update();">수정하기</a>
+	</body>
+</html>
