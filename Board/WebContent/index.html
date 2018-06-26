@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spring Board</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$.ajax({
+			url:"/Board/board",
+			dataType:"json",
+			method:"GET",
+			success:function(data){
+				var data= data.data;
+				var count=data.length;
+				$("#count").text(count);
+				var str="";
+				if(count ==0){
+					str+="<tr>";
+					str+="<td colspan='5' align='center'>글 없음</td>";
+					str+="</tr>";
+				}else if(count>0){
+					for(var i=0;i<count; i++){
+						str+="<tr>";
+						var board=data[i];
+						var writedate= board.writedate.substr(0,10);
+						var email= board.email;
+						str+="<td style='text-align:center'>"+board.grp+"</td>";
+						str+="<td style='text-align:center'><a href='mailto:"+email+"'>"+board.name+"</a></td>";
+						str+="<td><a href='board/"+board.idx+"'>"+board.title+"</a></td>";
+						str+="<td style='text-align:center'>"+writedate+"</td>";
+						str+="<td style='text-align:center'>"+board.readnum+"</td>";
+						str+="</tr>";
+					}
+				}
+				
+				$('#result').html(str);
+			}
+		});
+	})
+</script>
+</head>
+<body>
+<div id="ba"><img src="images/banner.png" /></div>
+	
+	<div id="banner">
+		<img src="images/board.png" width="50"/>
+		<span>Spring board</span>
+	</div>
+	<div>
+		<table border="0">
+			<tr>
+				<td><a href="board/write">글쓰기</a></td>
+				<td>[<span id="count"></span>]</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th width="10%">번호</th><th width="10%">작성자</th>
+						<th width="60%">제목</th><th width="10%">작성일</th>
+						<th width="10%">조회수</th>
+					</tr>
+				</thead>
+				<tbody id="result"></tbody>
+			</table>
+		</div>
+</body>
+</html>
